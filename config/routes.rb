@@ -1,8 +1,11 @@
 SWP::Application.routes.draw do
-  get "projects/home"
-  get "projects/help"
+  root 'welcome#home'
+  match 'help', to: 'welcome#help', via: 'get'
+  match 'about', to: 'welcome#about', via: 'get'
+  match 'contact', to: 'welcome#contact', via: 'get'
   resources :projects
   resources :users
+  match 'signup', to: 'Users#new', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
