@@ -1,4 +1,7 @@
 SWP::Application.routes.draw do
+  get "projects/home"
+  get "projects/help"
+  resources :projects
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
