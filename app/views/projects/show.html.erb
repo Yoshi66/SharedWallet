@@ -10,6 +10,15 @@
   <%= @project.user_id %>
 </p>
 
+<div class = "span8">
+  <% if @project.locations.any? %>
+  <h3>The Number of Locations: <%= @project.locations.count %></h3>
+  <ol class = "location">
+    <%= render @locations %>
+  </ol>
+  <% end %>
+</div>
+
 <div style='width: 800px;'>
   <div id="map" style='width: 800px; height: 400px;'></div>
 </div>

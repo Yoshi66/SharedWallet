@@ -15,12 +15,14 @@ class ProjectsController < ApplicationController
       marker.lat location.latitude
       marker.lng location.longitude
       marker.infowindow location.description
+    @locations = @project.locations.all
     end
   end
 
   # GET /projects/new
   def new
     @project = Project.new
+    @location = Location.new
   end
 
   def home
@@ -38,7 +40,8 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-
+    @location = Location.new(location_params)
+    @project.locations.build(address: @location.address)
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -79,9 +82,12 @@ class ProjectsController < ApplicationController
     def set_project
       @project = Project.find(params[:id])
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:content, :user_id, :place)
+    end
+
+    def location_params
+      params.require(:location).permit(:address, :project_id)
     end
 end
