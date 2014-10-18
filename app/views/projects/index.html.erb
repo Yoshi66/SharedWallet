@@ -1,30 +1,9 @@
-<h1>Listing projects</h1>
+<% provide(:title, 'All users') %>
+<h1>All Projects</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>User</th>
-      <th>Place</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<h2><%= link_to "new", 'projects/new' %>
+<ul class="projects">
+    <%= render @projects %>
+</ul>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.content %></td>
-        <td><%= project.user_id %></td>
-        <td><%= project.place %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+<%= will_paginate %>
