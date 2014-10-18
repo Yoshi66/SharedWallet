@@ -1,6 +1,27 @@
-<h1>Editing project</h1>
+<% provide(:title, "Edit Project") %>
+<h1>Update your Project</h1>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@project) do |f| %>
 
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+      <%= f.label :content %><br>
+      <%= f.text_field :content %>
+
+
+      <%= f.label :place %><br>
+      <%= f.text_field :place %>
+
+
+      <%= fields_for(@location) do |u| %>
+          <%= u.label :address %><br />
+          <%= u.text_field :address %>
+      <% end %>
+
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+      <% end %>
+
+    <%= gravatar_for @user %>
+    <a href="http://gravatar.com/emails">change</a>
+  </div>
+</div>
