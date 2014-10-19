@@ -1,0 +1,13 @@
+<h1>Where Did You Receive the Wallet?</h1>
+<%= form_for(@project, url:createpin_project_path) do |u| %>
+  <%= fields_for(@location) do |f|%>
+    <div class="field">
+      <%= f.label :address %><br>
+      <%= f.text_field :address %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= u.submit 'create pin'%>
+    <%#<%= f.submit 'Update Tag', :name => 'update' %>
+  </div>
+<% end %>

@@ -19,6 +19,9 @@ class ProjectsController < ApplicationController
     end
   end
 
+
+
+
   # GET /projects/new
   def new
     @project = Project.new
@@ -36,8 +39,18 @@ class ProjectsController < ApplicationController
   def edit
   end
 
-  # POST /projects
-  # POST /projects.json
+  def pin
+    @project = Project.new
+    @location = Location.new
+  end
+
+  def createpin
+    @project = Project.find(params[:id])
+    @location = Location.new(location_params)
+    @project.locations.build(address: @location.address).save
+    redirect_to project_path
+  end
+
   def create
     @project = Project.new(project_params)
     @location = Location.new(location_params)

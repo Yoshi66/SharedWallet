@@ -4,7 +4,12 @@ SWP::Application.routes.draw do
   match 'help', to: 'welcome#help', via: 'get'
   match 'about', to: 'welcome#about', via: 'get'
   match 'contact', to: 'welcome#contact', via: 'get'
-  resources :projects
+  resources :projects do
+    member do
+        get :pin
+        match 'createpin', to: "projects#createpin",  via: 'post'
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
