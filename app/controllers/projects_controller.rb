@@ -11,11 +11,11 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @location = Location.find(params[:id])
-    @hash = Gmaps4rails.build_markers(@location) do |location, marker|
+    @locations = @project.locations.all
+    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
       marker.infowindow location.description
-    @locations = @project.locations.all
     end
   end
 
