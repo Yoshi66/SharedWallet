@@ -12,6 +12,8 @@ gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'devise'
+gem 'carmen', github: 'seangaffney/carmen'
+gem 'carmen-rails', '~> 1.0.0', github: 'jim/carmen-rails'
 
 group :development do
   gem 'sqlite3', '1.3.8'

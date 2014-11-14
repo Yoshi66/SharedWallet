@@ -1,0 +1,12 @@
+<div id="project_state_code_wrapper">
+  <% parent_region ||= params[:parent_region] %>
+  <% country = Carmen::Country.coded(parent_region) unless parent_region.nil? %>
+
+  <% if country.nil? %>
+    <em>Please select a country above</em>
+  <% elsif country.subregions? %>
+    <%= subregion_select(:project, :state_code, parent_region) %>
+  <% else %>
+    <%= text_field(:project, :state_code) %>
+  <% end %>
+</div>

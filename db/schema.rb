@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019000935) do
+ActiveRecord::Schema.define(version: 20141112023527) do
 
   create_table "locations", force: true do |t|
     t.string   "description"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20141019000935) do
     t.datetime "updated_at"
     t.string   "place"
     t.string   "name"
+    t.string   "country_code"
+    t.string   "state_code"
   end
 
   create_table "users", force: true do |t|

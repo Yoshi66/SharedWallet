@@ -10,7 +10,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @location = Location.find(params[:id])
+    @location = Location.find(params[:project_id])
+    @locatoin.address = @project.content
+    @location.update
     @locations = @project.locations.all
     @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       marker.lat location.latitude
@@ -19,12 +21,14 @@ class ProjectsController < ApplicationController
     end
   end
 
-
-
+  def subregion_options
+    render partial: 'subregion_select'
+  end
 
   # GET /projects/new
   def new
     @project = Project.new
+    logger.debug("hello")
     @location = Location.new
   end
 
@@ -54,7 +58,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @location = Location.new(location_params)
-    @project.locations.build(address: @location.address)
+    @project.locations.build(address: @location.address, description: @location.description)
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -97,10 +101,10 @@ class ProjectsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:content, :user_id, :place)
+      params.require(:project).permit(:content, :user_id, :place, :country_code, :state_code)
     end
 
     def location_params
-      params.require(:location).permit(:address, :project_id)
+      params.require(:location).permit(:description, :address, :project_id)
     end
 end

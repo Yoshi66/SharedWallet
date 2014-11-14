@@ -5,6 +5,9 @@ SWP::Application.routes.draw do
   match 'about', to: 'welcome#about', via: 'get'
   match 'contact', to: 'welcome#contact', via: 'get'
   resources :projects do
+    collection do
+      get :subregion_options
+    end
     member do
         get :pin
         match 'createpin', to: "projects#createpin",  via: 'post'
@@ -13,6 +16,7 @@ SWP::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
