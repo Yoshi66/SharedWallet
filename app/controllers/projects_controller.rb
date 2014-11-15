@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, onlu: [:index]
+  before_action :authenticate_user!, only: [:index]
 
   # GET /projects
   # GET /projects.json
@@ -55,7 +55,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.build(project_params)#Project.new(project_params)
     @location = Location.new(location_params)
     @project.locations.build(address: @location.address, description: @location.description)
     respond_to do |format|
