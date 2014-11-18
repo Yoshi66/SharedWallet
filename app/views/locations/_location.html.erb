@@ -1,3 +1,7 @@
 <li>
   <span class="address"><%= location.address %></span>
+  <br>
+  <% if location.photo_file_name.present? %>
+    <%= image_tag location.photo.url(:medium) %>
+  <% end %>
 </li>

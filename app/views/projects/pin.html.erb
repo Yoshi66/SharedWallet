@@ -1,9 +1,13 @@
 <h1>Where Did You Receive the Wallet?</h1>
-<%= form_for(@project, url:createpin_project_path) do |u| %>
+<%= form_for(@project, url:createpin_project_path, :html => {:multipart => true}) do |u| %>
   <%= fields_for(@location) do |f|%>
     <div class="field">
       <%= f.label :address %><br>
       <%= f.text_field :address %>
+    </div>
+    <div class="field">
+      <%= f.label :photo %><br>
+      <%= f.file_field :photo %>
     </div>
   <% end %>
   <div class="actions">

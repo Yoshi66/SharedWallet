@@ -15,6 +15,7 @@ gem 'devise'
 gem 'carmen', github: 'seangaffney/carmen'
 gem 'carmen-rails', '~> 1.0.0', github: 'jim/carmen-rails'
 gem 'therubyracer'
+gem "paperclip", "~> 4.2"
 
 group :development do
   gem 'sqlite3', '1.3.8'

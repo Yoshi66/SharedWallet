@@ -50,14 +50,15 @@ class ProjectsController < ApplicationController
   def createpin
     @project = Project.find(params[:id])
     @location = Location.new(location_params)
-    @project.locations.build(address: @location.address).save
+    @project.locations.build(address: @location.address, photo: @location.photo).save
+
     redirect_to project_path
   end
 
   def create
     @project = current_user.projects.build(project_params)#Project.new(project_params)
     @location = Location.new(location_params)
-    @project.locations.build(address: @location.address, description: @location.description)
+    @project.locations.build(address: @location.address, description: @location.description, photo:@location.photo)
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -104,6 +105,10 @@ class ProjectsController < ApplicationController
     end
 
     def location_params
-      params.require(:location).permit(:description, :address, :project_id)
+      params.require(:location).permit(:description, :address, :project_id, :photo)
+    end
+
+    def location_params
+      params.require(:location).permit(:description, :address, :project_id, :photo)
     end
 end
