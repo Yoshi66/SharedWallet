@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @user = @project.user
     @location = Location.find(params[:id])
     @locations = @project.locations.all
     @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
@@ -40,6 +41,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @location = Location.find(params[:id])
+    @project = Project.find(params[:id])
   end
 
   def pin
@@ -52,6 +55,17 @@ class ProjectsController < ApplicationController
     @location = Location.new(location_params)
     @project.locations.build(address: @location.address, photo: @location.photo).save
 
+    redirect_to project_path
+  end
+
+  def editpin
+    @project = Project.find(params[:id])
+    @location = Location.find(params[:id])
+  end
+
+  def updatepin
+    @location = Location.find(params[:id])
+    @location.update(location_params)
     redirect_to project_path
   end
 
@@ -73,8 +87,10 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @location = Location.find(params[:id])
     respond_to do |format|
       if @project.update(project_params)
+        @location.update(location_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
       else

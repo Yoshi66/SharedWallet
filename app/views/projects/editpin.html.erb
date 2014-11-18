@@ -1,0 +1,15 @@
+<h1>Do You Want To Chnage Information?</h1>
+<h1>Update your Project</h1>
+
+<%= form_for(@project, url:updatepin_project_path) do |u| %>
+  <%= fields_for(@location) do |f|%>
+    <div class="field">
+      <%= f.label :address %><br>
+      <%= f.text_field :address %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= u.submit 'update pin'%>
+    <%#<%= f.submit 'Update Tag', :name => 'update' %>
+  </div>
+<% end %>

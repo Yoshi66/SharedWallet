@@ -1,5 +1,14 @@
 <li>
   <span class="address"><%= location.address %></span>
+  <% if location.created_at - @project.created_at < 5 %>
+  <p>
+  <%= @project.created_at %>
+  <%= location.created_at %>
+  <div align="right">
+    <%= link_to 'Edit Pin', editpin_project_path(@project, location) %>
+  </div>
+  </p>
+  <% end %>
   <br>
   <% if location.photo_file_name.present? %>
     <%= image_tag location.photo.url(:medium) %>

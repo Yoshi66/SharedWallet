@@ -11,6 +11,8 @@ SWP::Application.routes.draw do
     member do
         get :pin
         match 'createpin', to: "projects#createpin",  via: 'post'
+        get :editpin
+        match 'updatepin', to: "projects#updatepin", via: 'patch'
     end
   end
   #resources :sessions, only: [:new, :create, :destroy]
