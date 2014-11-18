@@ -17,7 +17,7 @@
     <%= render @locations %>
   </ol>
 
-  <%= link_to "Pin", pin_project_path %>
+  <%= link_to "Pin", new_project_location_path(@project,@location) %>
 
   <% end %>
 </div>

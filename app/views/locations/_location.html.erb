@@ -1,11 +1,12 @@
 <li>
   <span class="address"><%= location.address %></span>
-  <% if location.created_at - @project.created_at < 5 %>
+  <%= link_to @location %>
+  <% if location.created_at - @project.created_at = 0 %>
   <p>
   <%= @project.created_at %>
   <%= location.created_at %>
   <div align="right">
-    <%= link_to 'Edit Pin', editpin_project_path(@project, location) %>
+    <%= link_to 'Edit Pin',  edit_project_location_path(@project.id, location) %>
   </div>
   </p>
   <% end %>

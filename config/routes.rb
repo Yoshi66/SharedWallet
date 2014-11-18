@@ -8,13 +8,13 @@ SWP::Application.routes.draw do
     collection do
       get :subregion_options
     end
-    member do
-        get :pin
-        match 'createpin', to: "projects#createpin",  via: 'post'
-        get :editpin
-        match 'updatepin', to: "projects#updatepin", via: 'patch'
+    resources :locations do
+      collection do
+      end
     end
+    match 'update', to:'locations#update', via: 'patch'
   end
+
   #resources :sessions, only: [:new, :create, :destroy]
   #match '/signin',  to: 'sessions#new',         via: 'get'
   #match '/signout', to: 'sessions#destroy',     via: 'delete'

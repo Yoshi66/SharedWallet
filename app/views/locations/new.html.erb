@@ -1,0 +1,15 @@
+<h1>Where Did You Receive the Wallet?</h1>
+<%= form_for(@location, url:project_locations_path, :html => {:multipart => true}) do |u| %>
+    <div class="field">
+      <%= u.label :address %><br>
+      <%= u.text_field :address %>
+    </div>
+    <div class="field">
+      <%= u.label :photo %><br>
+      <%= u.file_field :photo %>
+    </div>
+  <div class="actions">
+    <%= u.submit 'create pin'%>
+    <%#<%= f.submit 'Update Tag', :name => 'update' %>
+  </div>
+<% end %>

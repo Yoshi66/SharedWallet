@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit,:update, :destroy]
   before_action :authenticate_user!, only: [:index]
 
   # GET /projects
@@ -31,6 +31,7 @@ class ProjectsController < ApplicationController
     logger.debug("hello")
     @location = Location.new
   end
+
 
   def home
   end
@@ -91,8 +92,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update(project_params)
         @location.update(location_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { head :no_content }
+        redirect_to @project
       else
         format.html { render action: 'edit' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -124,7 +124,4 @@ class ProjectsController < ApplicationController
       params.require(:location).permit(:description, :address, :project_id, :photo)
     end
 
-    def location_params
-      params.require(:location).permit(:description, :address, :project_id, :photo)
-    end
 end
