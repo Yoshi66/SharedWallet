@@ -1,7 +1,7 @@
 <h1>Do You Want To Chnage Information?</h1>
 <h1>Update your Project</h1>
 
-<%= form_for(@location, url: project_update_path) do |u| %>
+<%= form_for [@project, @location] do |u| %>
     <div class="field">
       <%= u.label :address %><br>
       <%= u.text_field :address %>

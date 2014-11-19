@@ -1,19 +1,16 @@
 SWP::Application.routes.draw do
   root 'welcome#home'
   devise_for :users
-  match 'help', to: 'welcome#help', via: 'get'
-  match 'about', to: 'welcome#about', via: 'get'
+  get 'help', to: 'welcome#help', as: "help"
+  get 'about', to: 'welcome#about', as: "about"
   match 'contact', to: 'welcome#contact', via: 'get'
   resources :projects do
     collection do
       get :subregion_options
     end
-    resources :locations do
-      collection do
-      end
-    end
-    match 'update', to:'locations#update', via: 'patch'
+    resources :locations
   end
+  resources :users
 
   #resources :sessions, only: [:new, :create, :destroy]
   #match '/signin',  to: 'sessions#new',         via: 'get'
