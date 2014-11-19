@@ -17,13 +17,9 @@
     <%= render @locations %>
   </ol>
     <!-- もしUserのprojectsに含まれているidが表示されている@project.idと同じならば プロジェクト作ってたら-->
-    <!--
-    <% if @user.projects.any? {|x| x[:id] != @project.id} %>
-    <% else %>
-       ユーザーが既にロケーションを持っていたら
+    <% if @user.locations.any? {|x| x[:id]} != @project.locations.any? {|x| x[:id]} %>
         <%= link_to "Pin", new_project_location_path(@project,@location) %>
-    <% end %> -->
-    <%= link_to "Pin", new_project_location_path(@project,@location) %>
+    <% end %>
   <% end %>
 </div>
 

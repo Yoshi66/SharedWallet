@@ -69,10 +69,10 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(project_params)#Project.new(project_params)
-    @location = Location.new(location_params)
     @country = Carmen::Country.coded(project_params[:country_code])
     @state = @country.subregions.coded(project_params[:state_code])
-    @project.locations.build(address: "#{@location.address}, #{@state.name}, #{@country.name}", description: @location.description, photo:@location.photo)
+    @location = @project.locations.build(address: "#{location_params[:address]}, #{@state.name}, #{@country.name}", description: location_params[:description], photo: location_params[:photo])
+    @location.user = current_user
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }

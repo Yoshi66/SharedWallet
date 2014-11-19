@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117024345) do
+ActiveRecord::Schema.define(version: 20141119215945) do
 
   create_table "locations", force: true do |t|
     t.string   "description"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20141117024345) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "user_id"
   end
 
   add_index "locations", ["project_id"], name: "index_locations_on_project_id"
