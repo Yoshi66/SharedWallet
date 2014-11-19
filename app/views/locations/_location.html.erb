@@ -7,6 +7,10 @@
   <%= location.created_at %>
   <div align="right">
     <%= link_to 'Edit Pin',  edit_project_location_path(@project.id, location) %>
+    <% if location == @project.locations.first %>
+    <% else %>
+    <%= link_to "delete", [@project, location], :method  => :delete %>
+    <% end %>
   </div>
   </p>
   <% end %>

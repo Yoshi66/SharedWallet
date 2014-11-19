@@ -2,14 +2,11 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit,:update, :destroy]
   before_action :authenticate_user!, only: [:index]
 
-  # GET /projects
-  # GET /projects.json
+
   def index
     @projects = Project.paginate(page: params[:page])
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
     @user = @project.user
     @location = Location.find(params[:id])
@@ -40,7 +37,7 @@ class ProjectsController < ApplicationController
   def help
   end
 
-  # GET /projects/1/edit
+
   def edit
     @location = Location.find(params[:id])
     @project = Project.find(params[:id])
@@ -73,7 +70,9 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)#Project.new(project_params)
     @location = Location.new(location_params)
-    @project.locations.build(address: @location.address, description: @location.description, photo:@location.photo)
+    @country = Carmen::Country.coded(project_params[:country_code])
+    @state = @country.subregions.coded(project_params[:state_code])
+    @project.locations.build(address: "#{@location.address}, #{@state.name}, #{@country.name}", description: @location.description, photo:@location.photo)
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -108,6 +107,10 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url }
       format.json { head :no_content }
     end
+  end
+
+  def self.method
+
   end
 
   private

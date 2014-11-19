@@ -30,6 +30,10 @@ class LocationsController < ApplicationController
   end
 
   def destroy
+    @project = Project.find(params[:project_id])
+    @location = Location.find(params[:id])
+    @location.destroy
+    redirect_to @project
   end
 
   private
