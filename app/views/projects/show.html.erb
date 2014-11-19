@@ -5,6 +5,11 @@
   <%= @project.content %>
 </p>
 
+
+<%= link_to 'Edit This Project Information', edit_project_path(@project) %> |
+<%= link_to 'Destroy thie project', project_path, :method => :delete %> |
+<%= link_to 'Go back to index', projects_path %>
+
 <p>
   <strong>User:</strong>
   <%= @project.user_id %>
@@ -35,8 +40,3 @@
       handler.fitMapToBounds();
     });
 </script>
-
-
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
