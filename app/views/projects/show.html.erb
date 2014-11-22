@@ -22,9 +22,9 @@
     <%= render @locations %>
   </ol>
     <!-- もしUserのprojectsに含まれているidが表示されている@project.idと同じならば プロジェクト作ってたら-->
-    <% if @user.locations.any? {|x| x[:id]} != @project.locations.any? {|x| x[:id]} %>
+    <%# <% if @user.locations.any? {|x| x[:id]} != @project.locations.any? {|x| x[:id]} %>
         <%= link_to "Pin", new_project_location_path(@project,@location) %>
-    <% end %>
+    <%#<% end %>
   <% end %>
 </div>
 
@@ -37,6 +37,10 @@
     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
       markers = handler.addMarkers(<%=raw @hash.to_json %>);
       handler.bounds.extendWith(markers);
+      polyline = <%=raw @hashroute.to_json %>;
+      handler.addPolyline(polyline);
+      handler.bounds.extend(polyline[0]);
+      handler.bounds.extend(polyline[ polyline.length - 1]);
       handler.fitMapToBounds();
     });
 </script>

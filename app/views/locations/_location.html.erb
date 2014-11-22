@@ -1,7 +1,7 @@
 <li>
   <span class="address"><%= location.address %></span>
   <%= link_to @location %>
-  <% if location != @project.locations.first %>
+  <%#<% if location != @project.locations.first %>
   <p>
   <%= @project.created_at %>
   <%= location.created_at %>
@@ -10,7 +10,7 @@
     <%= link_to "delete", [@project, location], :method  => :delete %>
   </div>
   </p>
-  <% end %>
+  <%#<% end %>
   <br>
   <% if location.photo_file_name.present? %>
     <%= image_tag location.photo.url(:medium) %>

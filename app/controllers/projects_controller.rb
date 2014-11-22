@@ -16,6 +16,17 @@ class ProjectsController < ApplicationController
       marker.lng location.longitude
       marker.infowindow location.description
     end
+    @hashroute =[]
+     @project.locations.each do |location|
+      @hashroute << { :lat => location.latitude, :lng => location.longitude}
+      @hashroute << { :lat => location.latitude, :lng => location.longitude}
+     end
+
+    respond_to do |format|
+          format.html {render :show}
+          format.json { head :ok}
+    end
+
   end
 
   def subregion_options
