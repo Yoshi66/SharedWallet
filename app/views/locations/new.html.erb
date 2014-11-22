@@ -1,5 +1,15 @@
 <h1>Where Did You Receive the Wallet?</h1>
 <%= form_for(@location, url:project_locations_path, :html => {:multipart => true}) do |u| %>
+    <%= fields_for(@project) do |u| %>
+      <div class="field">
+        <%= u.label :country_code %>
+        <%= u.country_select :country_code, priority: %w(US CA), prompt: 'Please select a country' %>
+      </div>
+      <div class="field">
+        <%= u.label :state_code %><br />
+        <%= render partial: 'projects/subregion_select', locals: {parent_region: u.object.country_code} %>
+      </div>
+    <% end %>
     <div class="field">
       <%= u.label :address %><br>
       <%= u.text_field :address %>
