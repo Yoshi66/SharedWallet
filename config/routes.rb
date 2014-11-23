@@ -1,6 +1,10 @@
 SWP::Application.routes.draw do
   root 'welcome#home'
-  devise_for :users
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signup',  to: 'users#new',            via: 'get'
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
   get 'help', to: 'welcome#help', as: "help"
   get 'about', to: 'welcome#about', as: "about"
   match 'contact', to: 'welcome#contact', via: 'get'
@@ -10,12 +14,6 @@ SWP::Application.routes.draw do
     end
     resources :locations
   end
-  resources :users
-
-  #resources :sessions, only: [:new, :create, :destroy]
-  #match '/signin',  to: 'sessions#new',         via: 'get'
-  #match '/signout', to: 'sessions#destroy',     via: 'delete'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
