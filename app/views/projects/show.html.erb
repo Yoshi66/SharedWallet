@@ -18,6 +18,24 @@
 <div class = "span8">
   <% if @project.locations.any? %>
   <h3>The Number of Locations: <%= @project.locations.count %></h3>
+
+  <div style='width: 800px;'>
+    <div id="map" style='width: 800px; height: 600px;'></div>
+  </div>
+
+  <script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      polyline = <%=raw @hashroute.to_json %>;
+      handler.addPolyline(polyline);
+      handler.bounds.extend(polyline[0]);
+      handler.bounds.extend(polyline[ polyline.length - 1]);
+    });
+</script>
+
   <ol class = "location">
     <%= render @locations %>
   </ol>
@@ -27,20 +45,3 @@
     <%#<% end %>
   <% end %>
 </div>
-
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-</div>
-
-<script type="text/javascript">
-    handler = Gmaps.build('Google');
-    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-      markers = handler.addMarkers(<%=raw @hash.to_json %>);
-      handler.bounds.extendWith(markers);
-      polyline = <%=raw @hashroute.to_json %>;
-      handler.addPolyline(polyline);
-      handler.bounds.extend(polyline[0]);
-      handler.bounds.extend(polyline[ polyline.length - 1]);
-      handler.fitMapToBounds();
-    });
-</script>

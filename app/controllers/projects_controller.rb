@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
-      marker.infowindow location.description
+      marker.infowindow render_to_string(:partial => "projects/info_template.html.erb", :locals => { :object => location})
     end
     @hashroute =[]
      @project.locations.each do |location|
@@ -93,6 +93,10 @@ class ProjectsController < ApplicationController
       end
     end
   end
+
+  #def gmaps4rails_sidebar
+  #  "<span class="foo">#{location.address}</span>" #put whatever you want here
+  #end
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json

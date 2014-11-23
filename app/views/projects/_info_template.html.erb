@@ -1,0 +1,6 @@
+<%= object.user.first_name %><h> </h><%= object.user.last_name %>
+<h> placed a pin on </h>
+<%= object.created_at %>
+<% if object.photo.present? %>
+  <p><%= image_tag object.photo.url(:medium) %></p>
+<% end %>
