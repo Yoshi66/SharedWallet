@@ -1,4 +1,11 @@
 <li>
   <%= link_to project.content, project%>
-  <p> Created By <%= project.user.email %> </p>
+  <% if project.locations.first.photo.present?%>
+  <p>
+    <%= link_to image_tag(project.locations.first.photo.url(:medium)), project %>
+  </p>
+  <% end %>
+  <p>
+    Created By <%= link_to project.user.first_name + " " + project.user.last_name, user_path(project.user) %>
+  </p>
 </li>

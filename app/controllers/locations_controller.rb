@@ -21,8 +21,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
     @country = Carmen::Country.coded(project_params[:country_code])
     @state = @country.subregions.coded(project_params[:state_code])
-    @location.user = current_user
-    @project.locations.build(address: "#{location_params[:address]}, #{@state.name}, #{@country.name}", photo: @location.photo, user_id: @location.user).save
+    @project.locations.build(address: "#{location_params[:address]}, #{@state.name}, #{@country.name}", photo: @location.photo, user_id: current_user.id).save
     redirect_to @project
   end
 
@@ -41,7 +40,7 @@ class LocationsController < ApplicationController
 
   private
     def location_params
-      params.require(:location).permit(:description, :address, :project_id, :photo, :user_id,)
+      params.require(:location).permit(:description, :address, :project_id, :photo, :user_id)
     end
 
     def project_params
