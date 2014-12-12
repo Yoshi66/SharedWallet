@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
     @location = Location.find(params[:id])
     @locations = @project.locations.all
     @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
@@ -65,6 +65,7 @@ class ProjectsController < ApplicationController
     end
     respond_to do |format|
       if @project.save
+        Invite.hello(@project.content).deliver
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render action: 'show', status: :created, location: @project }
       else

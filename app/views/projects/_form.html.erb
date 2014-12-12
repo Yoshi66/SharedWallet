@@ -22,13 +22,13 @@
     <%= render partial: 'subregion_select', locals: {parent_region: f.object.country_code} %>
   </div>
   <%= fields_for(@location) do |u| %>
-  <div class ="field">
-    <%= u.label :description%>
-    <%= u.text_field :description %>
-  </div>
   <div class="field">
     <%= u.label :address %><br />
     <%= u.text_field :address %>
+  </div>
+  <div class ="field">
+    <%= u.label :description%>
+    <%= u.text_field :description %>
   </div>
   <div class= "field">
     <%= u.label :photo %>
